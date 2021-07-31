@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title Here -->
+    <title>To Do</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header bg-dark px-3 pt-5 pb-4">
+            <h2 class="text-white text-center mb-4">To Do App</h2>
+            <div>
+                <input type="text" id="searchInput" class="form-control" placeholder="Search your product">
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="alert alert-danger d-none" id="emptyProductAlert">No Item Available</div>
+                <div class="alert alert-success d-none" id="productActionAlert"></div>
+                <ul id="product-container" class="list-group mb-5">
+                    <!-- <li id="product-0" class="list-group-item d-flex justify-content-between">
+                        <div><b>Rice</b> - $20</div>
+                        <div>
+                            <span class="product-edit"><i class="fas fa-pencil-alt"></i></span>
+                            <span class="product-delete"><i class="fas fa-trash"></i></span>
+                        </div>
+                    </li>
+                    <li id="product-1" class="list-group-item d-flex justify-content-between">
+                        <div><b>Rice</b> - $20</div>
+                        <div>
+                            <span class="product-edit"><i class="fas fa-pencil-alt"></i></span>
+                            <span class="product-delete"><i class="fas fa-trash"></i></span>
+                        </div>
+                    </li> -->
+                </ul>
+
+                <form id="product-form">
+                    <div class="row mb-2">
+                        <div class="col-md-6">
+                            <input type="text" id="nameInput" class="form-control" placeholder="Product Name">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="priceInput" class="form-control" placeholder="Product Price">
+                        </div>
+                    </div>
+                    <button id="add-btn" class="btn btn-primary w-100">Add Product</button>
+                    <button id="edit-btn" class="btn btn-info w-100 d-none">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
