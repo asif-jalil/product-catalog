@@ -10,8 +10,6 @@ const productActionAlert = document.querySelector("#productActionAlert");
 
 let productData = loadFromLocalStorage();
 
-
-
 function loadListeners() {
     addBtn.addEventListener("click", addProduct);
     productContainer.addEventListener("click", getAction);
@@ -119,36 +117,70 @@ function deleteProduct(productId) {
     actionMsg("delete");
 }
 
-function editProduct(product) {
-    editBtn.addEventListener("click", e => {
-        e.preventDefault();
+// function editProduct(product) {
+//     editBtn.addEventListener("click", e => {
+//         e.preventDefault();
+    
+//         const productName = nameInput.value.trim();
+//         const productPrice = priceInput.value.trim();
+    
+//         let isValidate = checkValidation(productName, productPrice, payload => {
+//             payload && alert(payload)
+//         });
+    
+//         if (isValidate) {
+//             const updatedProduct = {
+//                 ...product,
+//                 name: productName,
+//                 price: productPrice,
+//             };
+    
+//             const restProduct = productData.filter(p => p.id !== product.id);
+//             console.log(restProduct);
+//             productData = [...restProduct, updatedProduct];
+//             localStorage.setItem("productData", JSON.stringify(productData));
+//             productContainer.innerHTML = "";
+//             getProductData(productData);
+//             productForm.reset();
+//             actionMsg("edit");
+//             addBtn.classList.remove("d-none");
+//             editBtn.classList.add("d-none");
+//             addBtn.setAttribute('type', 'submit')
+//         }
+//     });
+// }
 
-        const productName = nameInput.value.trim();
-        const productPrice = priceInput.value.trim();
+editBtn.addEventListener("click", e => {
+    e.preventDefault();
 
-        let isValidate = checkValidation(productName, productPrice, payload => {
-            payload && alert(payload)
-        });
+    const productId = Number(e.target.getAttribute('data-id'));
+    const productName = nameInput.value.trim();
+    const productPrice = priceInput.value.trim();
 
-        if (isValidate) {
-            const updatedProduct = {
-                ...product,
-                name: productName,
-                price: productPrice,
-            };
-
-            const restProduct = productData.filter(p => p.id !== product.id);
-            productData = [...restProduct, updatedProduct];
-            localStorage.setItem("productData", JSON.stringify(productData));
-            productContainer.innerHTML = "";
-            getProductData(productData);
-            productForm.reset();
-            actionMsg("edit");
-            addBtn.classList.remove("d-none");
-            editBtn.classList.add("d-none");
-        }
+    let isValidate = checkValidation(productName, productPrice, payload => {
+        payload && alert(payload)
     });
-}
+
+    if (isValidate) {
+        const updatedProduct = {
+            id: productId,
+            name: productName,
+            price: productPrice,
+        };
+
+        const restProduct = productData.filter(p => p.id !== productId);
+        console.log(restProduct);
+        productData = [...restProduct, updatedProduct];
+        localStorage.setItem("productData", JSON.stringify(productData));
+        productContainer.innerHTML = "";
+        getProductData(productData);
+        productForm.reset();
+        actionMsg("edit");
+        addBtn.classList.remove("d-none");
+        editBtn.classList.add("d-none");
+        addBtn.setAttribute('type', 'submit')
+    }
+});
 
 function getAction(e) {
     const selectedLi = e.target.closest("li");
@@ -173,7 +205,7 @@ function getAction(e) {
             product => product.id === productId
         );
         populateProduct(selectedProduct);
-        editProduct(selectedProduct);
+        // editProduct(selectedProduct);
     }
 
 }
@@ -181,8 +213,10 @@ function getAction(e) {
 function populateProduct(selectedProduct) {
     nameInput.value = selectedProduct.name;
     priceInput.value = selectedProduct.price;
+    editBtn.setAttribute('data-id', selectedProduct.id)
     addBtn.classList.add("d-none");
     editBtn.classList.remove("d-none");
+    addBtn.setAttribute('type', 'button')
 }
 
 function filterProduct(e) {
